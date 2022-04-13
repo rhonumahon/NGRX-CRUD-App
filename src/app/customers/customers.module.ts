@@ -7,6 +7,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { customerReducer } from './state/customer.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CustomerEffect } from './state/customer.effects';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { customerReducer } from './state/customer.reducer';
       },
     ]),
     StoreModule.forFeature('customers', customerReducer),
+    EffectsModule.forFeature([CustomerEffect]),
   ],
 })
 export class CustomersModule {}
