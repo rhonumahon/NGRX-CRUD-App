@@ -1,7 +1,7 @@
-<h3>Customers</h3>
+<h3>List of Customers</h3>
 <table class="table table-hover">
   <thead>
-    <tr class="table-primary">
+    <tr class="table-info">
       <th scope="col">Name</th>
       <th scope="col">Phone</th>
       <th scope="col">Address</th>
@@ -10,23 +10,65 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <tr>
-      <td colspan="5" class="alert alert-danger" *ngIf="error$ | async as error">{{error}}</td>
-    </tr> -->
+    <tr>
+      <td
+        colspan="5"
+        class="alert alert-danger"
+        *ngIf="error$ | async as error"
+      >
+        {{ error }}
+      </td>
+    </tr>
     <tr></tr>
     <tr *ngFor="let customer of customers$ | async">
-      -->
       <th scope="row">{{ customer.name }}</th>
       <td>{{ customer.phone }}</td>
       <td>{{ customer.address }}</td>
       <td>{{ customer.membership }}</td>
       <th>
-        <a>edit</a>
-        <a>delete</a>
-        <!-- <a (click)=editCustomer(customer)>edit</a> -->
-        <br />
-        <!-- <a (click)=deleteCustomer(customer)>delete</a> -->
+        <div class="row">
+          <button
+            class="btn btn-success mr-2"
+            (click)="editCustomer(customer)"
+            data-toggle="modal"
+            data-target="#exampleEditModal"
+          >
+            edit
+          </button>
+          <br />
+          <button class="btn btn-danger" (click)="deleteCustomer(customer)">
+            delete
+          </button>
+        </div>
       </th>
     </tr>
   </tbody>
 </table>
+<div
+  class="modal fade"
+  id="exampleEditModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleEditModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleEditModalLabel">Edit Customer</h5>
+        <button
+          id="closeEditButton"
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-customer-edit></app-customer-edit>
+      </div>
+    </div>
+  </div>
+</div>

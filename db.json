@@ -1,18 +1,46 @@
 {
   "customers": [
     {
-      "name": "John Doe",
-      "phone": "910928392098",
-      "address": "123 Sun Street",
-      "membership": "Platinum",
-      "id": 1
+      "name": "Ashleyersefsf U SO",
+      "phone": "9725561616",
+      "address": "6750 N. McArthur Blvd",
+      "membership": "Pro",
+      "id": 6
     },
     {
-      "name": "Mary Johnson",
-      "phone": "808937482734",
-      "address": "893 Main Voulevard",
+      "name": "Heavens P Thought",
+      "phone": "2815931500",
+      "address": "3620 North Josey Lane",
       "membership": "Pro",
-      "id": 2
+      "id": 7
+    },
+    {
+      "name": "Nikola D Tesla",
+      "phone": "+11504872895",
+      "address": "123 test",
+      "membership": "Basic",
+      "id": 8
+    },
+    {
+      "name": "Nikola D Tesla",
+      "phone": "+11504872895",
+      "address": "123 test",
+      "membership": "Pro",
+      "id": 9
+    },
+    {
+      "name": "Ashleyersefsf U SO",
+      "phone": "9725561616",
+      "address": "6750 N. McArthur Blvd",
+      "membership": "Basic",
+      "id": 10
+    },
+    {
+      "name": "Rhon Michael ponaya umahon",
+      "phone": "2815931500",
+      "address": "Purok 2, Brgy. Calicanto",
+      "membership": "Platinum",
+      "id": 11
     }
   ]
 }
