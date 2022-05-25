@@ -5,6 +5,11 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
     component: HomeComponent,
   },
   {
@@ -16,6 +21,11 @@ const routes: Routes = [
     path: 'customers',
     loadChildren: () =>
       import('./customers/customers.module').then((m) => m.CustomersModule),
+  },
+  {
+    path: '**',
+      redirectTo: 'home',
+      pathMatch: 'full'
   },
 ];
 
