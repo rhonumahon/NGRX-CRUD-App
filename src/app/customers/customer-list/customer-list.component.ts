@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { merge, mergeMap, Observable, of, switchMap } from 'rxjs';
 
 import * as customerActions from '../state/customer.actions';
 import * as fromCustomer from '../state/customer.reducer';
@@ -15,11 +15,14 @@ import { Customer } from '../customer.model';
 export class CustomerListComponent implements OnInit {
   customers$: Observable<Customer[]>;
   error$: Observable<String>;
+  isLoaded: boolean = false;
 
   constructor(private store: Store<fromCustomer.AppState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new customerActions.LoadCustomers());
+    this.store.pipe(select(fromCustomer.getCustomersLoaded)).subscribe(i => this.isLoaded = i);
+    
+    if(!this.isLoaded) this.store.dispatch(new customerActions.LoadCustomers());
     this.customers$ = this.store.pipe(select(fromCustomer.getCustomers));
     this.error$ = this.store.pipe(select(fromCustomer.getError));
   }
