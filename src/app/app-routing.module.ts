@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { ShopResolver } from './shop/shop.resolver';
 
 const routes: Routes = [
   {
@@ -16,6 +17,9 @@ const routes: Routes = [
     path: 'shop',
     loadChildren: () =>
       import('./shop/shop.module').then((m) => m.ShopModule),
+      resolve: {
+        shop: ShopResolver
+      }
   },
   {
     path: 'customers',
@@ -32,5 +36,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [ShopResolver]
 })
 export class AppRoutingModule {}

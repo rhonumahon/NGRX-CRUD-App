@@ -43,7 +43,8 @@
       "id": 11
     }
   ],
-  "shop": [
-    {"title": "Mystery Shopping Scams", "description": "As a prominent market and consumer research provider, Mintel Group Ltd. routinely engages mystery shoppers to gather products and information. The good reputation of Mintel’s mystery shopper network, however, sometimes attracts fraudulent mystery shopper scams. Unfortunately, Mintel regularly receives notice of fraudulent mystery shopper scams that impersonate Mintel. Even though Mintel’s actual company name and service mark are used, the phone numbers, employee names, and websites provided in the job postings or letters are phony. Mintel deplores the fraudulent use of its brand and reports these scams to law enforcement. To assist you in identifying and avoiding fraudulent mystery shopper scams, consult the following resources."}
-  ]
+  "shop": {
+    "title": "Mystery Shopping Scams",
+    "description": "As a prominent market and consumer research provider, Mintel Group Ltd. routinely engages mystery shoppers to gather products and information. The good reputation of Mintel’s mystery shopper network, however, sometimes attracts fraudulent mystery shopper scams. Unfortunately, Mintel regularly receives notice of fraudulent mystery shopper scams that impersonate Mintel. Even though Mintel’s actual company name and service mark are used, the phone numbers, employee names, and websites provided in the job postings or letters are phony. Mintel deplores the fraudulent use of its brand and reports these scams to law enforcement. To assist you in identifying and avoiding fraudulent mystery shopper scams, consult the following resources."
+  }
 }

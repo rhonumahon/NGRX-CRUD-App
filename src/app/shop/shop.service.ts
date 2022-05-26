@@ -12,7 +12,7 @@ export class ShopService {
 
   constructor(private http: HttpClient) {}
 
-  getShop(): Observable<Shop[]> {
-    return this.http.get<Shop[]>(this.shopUrl);
+  getShop(): Observable<Shop> {
+    return this.http.get<Shop>(this.shopUrl);
   }
 }

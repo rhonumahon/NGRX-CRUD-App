@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShopComponent } from './shop.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { shopReducer } from './state/shop.reducer';
+import * as fromShop from './state/shop.reducer';
 import { ShopEffect } from './state/shop.effects';
 console.log('shop');
 
@@ -36,7 +36,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('shop', shopReducer),
+    StoreModule.forFeature('shop', fromShop.shopReducer),
     EffectsModule.forFeature([ShopEffect]),
   ]
 })

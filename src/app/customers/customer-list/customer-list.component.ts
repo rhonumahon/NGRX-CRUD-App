@@ -15,14 +15,11 @@ import { Customer } from '../customer.model';
 export class CustomerListComponent implements OnInit {
   customers$: Observable<Customer[]>;
   error$: Observable<String>;
-  isLoaded: boolean = false;
 
   constructor(private store: Store<fromCustomer.AppState>) {}
 
   ngOnInit() {
-    this.store.pipe(select(fromCustomer.getCustomersLoaded)).subscribe(i => this.isLoaded = i);
-    
-    if(!this.isLoaded) this.store.dispatch(new customerActions.LoadCustomers());
+    this.store.dispatch(new customerActions.LoadCustomers());
     this.customers$ = this.store.pipe(select(fromCustomer.getCustomers));
     this.error$ = this.store.pipe(select(fromCustomer.getError));
   }
