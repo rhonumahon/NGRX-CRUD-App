@@ -116,6 +116,7 @@ shop: ShopState
 const initialState: ShopState = {
   title: '',
   description: '',
+  categories: [],
   shopLoaded: false
 }
 

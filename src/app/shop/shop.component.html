@@ -2,33 +2,14 @@
     <h3 class="mt-3">{{shop.title}}</h3>
     <p>{{shop.description}}</p>
 
+    <h5>Categories:</h5>
+
 <div class="container d-flex flex-wrap">
 
-    <div class="card m-3  ">
+    <div class="card m-3" *ngFor="let cat of shop.categories">
         <div class="card-body">
-            <a class="nav-link" aria-current="page" routerLink="personal">Personal</a>
-
-        </div>
-      </div>
-      <div class="card m-3">
-        <div class="card-body">
-            <a class="nav-link" routerLink="houseLot">House or Lot</a>
-        </div>
-      </div>
-
- 
-    <div class="card m-3  ">
-        <div class="card-body">
-            <a class="nav-link" routerLink="vehicles">Vehicles</a>
-        </div>
-      </div>
-      <div class="card m-3">
-        <div class="card-body">
-            <a class="nav-link" routerLink="industrial" tabindex="-1" aria-disabled="true">Industrial</a>
+            <a class="nav-link" aria-current="page" [routerLink]="cat.link">{{cat.category}}</a>
         </div>
       </div>
  </div>
-
- 
-
 </div>
