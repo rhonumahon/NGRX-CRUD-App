@@ -2,7 +2,8 @@
 // import { Shop } from '../shop.model';
 
 import { createAction } from "@ngrx/store";
-import { Shop } from '../shop.model'
+import { Category, Shop } from '../shop.model'
+import { ShopState } from "./shop.reducer";
 
 // export enum ShopActionTypes {
 //   LOAD_SHOP = '[Shop] Load Shop',
@@ -41,7 +42,7 @@ export const loadShop = createAction(
   );
 export const loadShopSuccess = createAction(
   ShopActionTypes.LOAD_SHOP_SUCCESS,
-  (shop: Shop) => shop
+  (shop) => shop
   
 );
 export const loadShopFail = createAction(

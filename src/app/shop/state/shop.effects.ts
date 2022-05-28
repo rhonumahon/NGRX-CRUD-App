@@ -10,8 +10,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
-import { catchError, map, mergeMap, Observable, of, tap } from "rxjs";
-import { Shop } from "../shop.model";
+import { catchError, combineLatestWith, map, mergeMap, Observable, of, tap } from "rxjs";
+import { Category, Shop } from "../shop.model";
 import { ShopService } from "../shop.service";
 import * as shopActions from './shop.actions'
 
@@ -55,8 +55,9 @@ export class ShopEffect {
       ),
       mergeMap((action: shopActions.ShopActionTypes) => 
       this.shopService.getShop().pipe(
-        map((shop: Shop) =>  shopActions.loadShopSuccess(shop)),
-        catchError((err) => of(shopActions.loadShopFail(err)))
+        combineLatestWith(this.shopService.getCategories()),
+        map(([shop, cat]) =>  shopActions.loadShopSuccess([shop, cat])),
+        catchError((err ) => of(shopActions.loadShopFail(err)))
       ))
     )
 

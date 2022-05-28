@@ -6,7 +6,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromShop from './state/shop.reducer';
 import { ShopEffect } from './state/shop.effects';
-console.log('shop');
 
 const routes: Routes = [
   {

@@ -5,7 +5,7 @@
 // import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
-import { Shop } from "../shop.model";
+import { Category, Shop } from "../shop.model";
 import { loadShop, loadShopSuccess } from "./shop.actions";
 import * as fromRoot from './../../state/app-state'
 import { createEntityAdapter } from "@ngrx/entity";
@@ -108,6 +108,7 @@ import { createEntityAdapter } from "@ngrx/entity";
 //-------------------------------------------------------------
 export interface ShopState extends Shop {
 shopLoaded: boolean
+categories: Category[]
 }
 export interface AppState extends fromRoot.AppState {
 shop: ShopState
@@ -116,16 +117,19 @@ shop: ShopState
 const initialState: ShopState = {
   title: '',
   description: '',
-  categories: [],
-  shopLoaded: false
+  shopLoaded: false,
+  categories: []
 }
+
+
 
 export const shopReducer = createReducer(
   initialState,
   on(loadShop, state => state),
   on(loadShopSuccess, (state, action) => {
-    return {...action, shopLoaded: true}
-  })
+    return {...action[0],  categories: action[1], shopLoaded: true,}
+  }),
+
 )
 
 export const selectShopState = createFeatureSelector<ShopState>('shop');

@@ -38,9 +38,6 @@ export class ShopComponent implements OnInit {
   shop$ = this.store.select(fromShop.selectShopState)
   constructor(private store: Store<fromShop.AppState>) {}
 
-  ngOnInit(): void {
-    this.store.select(fromShop.selectShopState).subscribe(i => console.log(i)
-    )
-  }
+  ngOnInit(): void {}
 
 }
