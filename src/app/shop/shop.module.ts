@@ -10,24 +10,27 @@ import { ShopEffect } from './state/shop.effects';
 const routes: Routes = [
   {
     path: '',
-    component: ShopComponent
+    component: ShopComponent,
+    children: [
+      {
+        path: 'personal',
+        loadChildren: ()=> import('./personal/personal.module').then(m => m.PersonalModule)
+      },
+      {
+        path: 'houseLot',
+        loadChildren: ()=> import('./house-lot/house-lot.module').then(m => m.HouseLotModule)
+      },
+      {
+        path: 'vehicles',
+        loadChildren: ()=> import('./cars/cars.module').then(m => m.CarsModule)
+      },
+      {
+        path: 'industrial',
+        loadChildren: ()=> import('./industrial/industrial.module').then(m => m.IndustrialModule)
+      }
+    ]
   },
-  {
-    path: 'personal',
-    loadChildren: ()=> import('./personal/personal.module').then(m => m.PersonalModule)
-  },
-  {
-    path: 'houseLot',
-    loadChildren: ()=> import('./house-lot/house-lot.module').then(m => m.HouseLotModule)
-  },
-  {
-    path: 'vehicles',
-    loadChildren: ()=> import('./cars/cars.module').then(m => m.CarsModule)
-  },
-  {
-    path: 'industrial',
-    loadChildren: ()=> import('./industrial/industrial.module').then(m => m.IndustrialModule)
-  }
+  
 ]
 
 @NgModule({
