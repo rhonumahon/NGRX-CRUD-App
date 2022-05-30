@@ -25,8 +25,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { loadShop } from './state/shop.actions';
+import { map, Observable} from 'rxjs';
+import { selectCurrentUrl } from '../state/router/router.selector';
 import * as fromShop from './state/shop.reducer'
 
 @Component({
@@ -36,8 +36,14 @@ import * as fromShop from './state/shop.reducer'
 })
 export class ShopComponent implements OnInit {
   shop$ = this.store.select(fromShop.selectShopState)
-  constructor(private store: Store<fromShop.AppState>) {}
+  currentUrl$: Observable<string>;
+  constructor(private store: Store<fromShop.AppState>) {
 
-  ngOnInit(): void {}
+  }
 
+  ngOnInit(): void {
+    this.currentUrl$ = this.store.select(selectCurrentUrl).pipe(
+      map(url => url)
+    )
+  }
 }
