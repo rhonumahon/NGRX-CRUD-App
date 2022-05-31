@@ -33,9 +33,24 @@ import { ShopState } from "./shop.reducer";
 export enum ShopActionTypes {
   LOAD_SHOP = '[SHOP] Load Shop',
   LOAD_SHOP_SUCCESS = '[SHOP] Load Shop Success',
-  LOAD_SHOP_FAIL = '[SHOP] Load Shop Fail'
+  LOAD_SHOP_FAIL = '[SHOP] Load Shop Fail',
+
+  INCREMENT = '[SHOP COUNTER] Increment',
+  DECREMENT = '[SHOP COUNTER] Decrement',
+  RESET = '[SHOP COUNTER] Reset',
 
 }
+
+export const increment = createAction(
+  ShopActionTypes.INCREMENT
+);
+
+export const decrement = createAction(
+  ShopActionTypes.DECREMENT
+);
+export const reset = createAction(
+  ShopActionTypes.RESET
+)
 
 export const loadShop = createAction(
   ShopActionTypes.LOAD_SHOP

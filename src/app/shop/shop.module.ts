@@ -6,6 +6,9 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromShop from './state/shop.reducer';
 import { ShopEffect } from './state/shop.effects';
+import { CounterComponent } from './counter/counter.component';
+import { CounterButtonsComponent } from './counter/counter-buttons/counter-buttons.component';
+import { CounterOutputComponent } from './counter/counter-output/counter-output.component';
 
 const routes: Routes = [
   {
@@ -34,7 +37,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [ShopComponent],
+  declarations: [ShopComponent, CounterComponent, CounterButtonsComponent, CounterOutputComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

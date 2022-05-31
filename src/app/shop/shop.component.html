@@ -1,6 +1,7 @@
 <div class="container" *ngIf="shop$ | async as shop">
     <h3 class="mt-3">{{shop.title}}</h3>
     <p>{{shop.description}}</p>
+    <app-counter></app-counter>
     <ul class="nav nav-tabs">
         <li class="nav-item" *ngFor="let cat of shop.categories">
           <a *ngIf="currentUrl$ | async as url" class="nav-link {{ url.includes(cat.link) ? 'active' : ''}}" [routerLink]="cat.link">{{cat.category}}</a>
