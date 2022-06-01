@@ -42,7 +42,6 @@ export function customerReducer(
     }
 
     case customerActions.CustomerActionTypes.LOAD_CUSTOMERS_SUCCESS: {
-      console.log(action);
       
       return customerAdapter.setAll(action.payload, {
         ...state,

@@ -14,4 +14,15 @@ export interface CarBrands{
   category: string;
   link: string;
 }
+
+export interface IVehicle {
+  cars: ICars[];
+  isCarLoaded: boolean;
+}
+
+export interface ICars {
+  id: number;
+  category: string;
+  link: string;
+}
   

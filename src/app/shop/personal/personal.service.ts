@@ -13,5 +13,4 @@ constructor(private http: HttpClient){
 getPersonal(): Observable<IPersonal[]> {
     return this.http.get<IPersonal[]>(this.personalUrl);
   }
-
 }

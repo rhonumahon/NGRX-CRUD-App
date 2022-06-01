@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICars } from '../state/shop.reducer';
 import * as fromShop from '../state/shop.reducer'
 import { Store } from '@ngrx/store';
 
@@ -15,8 +14,6 @@ cars$: Observable<any>
 
   ngOnInit(): void {
     this.cars$ = this.store.select(fromShop.selectCars)
-    this.store.select(fromShop.selectCars).subscribe(i => console.log(i)
-    )
   }
 
 }

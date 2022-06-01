@@ -21,7 +21,6 @@ export class CustomerEffect {
       ),
       mergeMap((action: customerActions.LoadCustomers) =>
         this.customerService.getCustomers().pipe(
-          tap(i => console.log(i)),
           map(
             (customers: Customer[]) =>
               new customerActions.LoadCustomersSuccess(customers)

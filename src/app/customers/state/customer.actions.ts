@@ -27,8 +27,7 @@ export class LoadCustomers implements Action {
 export class LoadCustomersSuccess implements Action {
   readonly type = CustomerActionTypes.LOAD_CUSTOMERS_SUCCESS;
 
-  constructor(public payload: Customer[]) {console.log(payload);
-  }
+  constructor(public payload: Customer[]) {}
 }
 
 export class LoadCustomersFail implements Action {

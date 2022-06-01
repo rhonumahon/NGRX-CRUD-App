@@ -12,8 +12,7 @@ export interface PersonalState extends EntityState<IPersonal>{
     isLoaded: boolean
 }
 
-//export const personalAdapter: EntityAdapter<IPersonal> =
-export const personalAdapter =
+export const personalAdapter: EntityAdapter<IPersonal> =
   createEntityAdapter<IPersonal>();
 
   export const defaultPersonal: PersonalState = {
@@ -49,5 +48,5 @@ export const personalIsLoaded = createSelector(
 export const personalEntities= createSelector(
     selectPersonalState,
     personalAdapter.getSelectors().selectAll
-  )
+)
 

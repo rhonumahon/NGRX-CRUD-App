@@ -10,7 +10,6 @@ import * as fromPersonalReducer from './state/personal.reducer'
 export class PersonalResolver implements Resolve<any>{
     loading: boolean = false;
     constructor(private store: Store<fromRoot.AppState>){
-        console.log('resolve');
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
