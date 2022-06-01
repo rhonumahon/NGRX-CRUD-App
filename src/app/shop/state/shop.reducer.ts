@@ -164,9 +164,8 @@ on(reset, (state)=> {
 }),
 on(loadCarBrands, (state) => state),
 on(loadCarBrandsSuccess, (state, action) => {
-
   return {
-    ...state, vehicles: { cars:Object.values(action)  , isCarLoaded: true} 
+    ...state, vehicles: { cars: action.cars, isCarLoaded: true} 
   }
 })
   

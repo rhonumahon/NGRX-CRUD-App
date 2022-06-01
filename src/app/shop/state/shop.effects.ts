@@ -14,6 +14,7 @@ import { catchError, combineLatestWith, map, mergeMap, Observable, of, tap } fro
 import { Category, Shop } from "../shop.model";
 import { ShopService } from "../shop.service";
 import * as shopActions from './shop.actions'
+import { ICars } from "./shop.reducer";
 
 // @Injectable()
 // export class ShopEffect {
@@ -73,7 +74,7 @@ export class ShopEffect {
     this.shopService.getCarBrands().pipe(
       tap(car => console.log(car)
       ),
-      map((car) =>  shopActions.loadCarBrandsSuccess(car)),
+      map((cars: ICars[]) =>  shopActions.loadCarBrandsSuccess({cars})),
       catchError((err ) => of(shopActions.loadCarBrandsFail(err)))
     ))
   )

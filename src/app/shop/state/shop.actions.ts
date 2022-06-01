@@ -1,9 +1,9 @@
 // import { Action } from '@ngrx/store';
 // import { Shop } from '../shop.model';
 
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Category, Shop } from '../shop.model'
-import { ShopState } from "./shop.reducer";
+import { ICars, ShopState } from "./shop.reducer";
 
 // export enum ShopActionTypes {
 //   LOAD_SHOP = '[Shop] Load Shop',
@@ -74,9 +74,9 @@ export const loadShopFail = createAction(
     );
   export const loadCarBrandsSuccess = createAction(
     ShopActionTypes.LOAD_CARBRANDS_SUCCESS,
-    (shop) => shop
-    
+    props<{cars: ICars[]}>()
   );
+
   export const loadCarBrandsFail = createAction(
     ShopActionTypes.LOAD_CARBRANDS_FAIL,
     (err) => err
