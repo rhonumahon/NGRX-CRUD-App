@@ -1,1 +1,3 @@
-<p>personal works!</p>
+<div *ngFor="let per of personal$ |async">
+    <h5>{{per.category}}</h5>
+</div>

@@ -10,6 +10,7 @@ import { CounterComponent } from './counter/counter.component';
 import { CounterButtonsComponent } from './counter/counter-buttons/counter-buttons.component';
 import { CounterOutputComponent } from './counter/counter-output/counter-output.component';
 import { CarsResolver } from './cars/cars.resolver';
+import { PersonalResolver } from './personal/personal.resolver';
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
     children: [
       {
         path: 'personal',
-        loadChildren: ()=> import('./personal/personal.module').then(m => m.PersonalModule)
+        loadChildren: ()=> import('./personal/personal.module').then(m => m.PersonalModule),
+        resolve: {
+          personal: PersonalResolver
+        }
       },
       {
         path: 'houseLot',
@@ -48,6 +52,6 @@ const routes: Routes = [
     StoreModule.forFeature('shop', fromShop.shopReducer),
     EffectsModule.forFeature([ShopEffect]),
   ],
-  providers: [CarsResolver]
+  providers: [CarsResolver, PersonalResolver]
 })
 export class ShopModule { }

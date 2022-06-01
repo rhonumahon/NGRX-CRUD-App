@@ -107,5 +107,19 @@
       "category": "BMW",
       "link": "bmw"
     }
+  ],
+  "personal": [
+    {
+      "id": 1,
+      "category": "Top"
+    },
+    {
+      "id": 2,
+      "category": "Bag"
+    },
+    {
+      "id": 3,
+      "category": "Throusers"
+    }
   ]
 }
