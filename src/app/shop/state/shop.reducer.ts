@@ -6,7 +6,7 @@
 
 import { createAction, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { Category, Shop } from "../shop.model";
-import { decrement, increment, loadShop, loadShopSuccess, reset } from "./shop.actions";
+import { decrement, increment, loadCarBrands, loadCarBrandsSuccess, loadShop, loadShopSuccess, reset } from "./shop.actions";
 import * as fromRoot from './../../state/app-state'
 import { createEntityAdapter } from "@ngrx/entity";
 
@@ -109,7 +109,19 @@ import { createEntityAdapter } from "@ngrx/entity";
 export interface ShopState extends Shop {
 shopLoaded: boolean
 categories: Category[],
-counter: number
+counter: number,
+vehicles: IVehicle
+}
+
+export interface IVehicle {
+  cars: ICars[];
+  isCarLoaded: boolean;
+}
+
+export interface ICars {
+  id: number;
+  category: string;
+  link: string;
 }
 export interface AppState extends fromRoot.AppState {
 shop: ShopState
@@ -120,7 +132,8 @@ const initialState: ShopState = {
   description: '',
   shopLoaded: false,
   categories: [],
-  counter: 0
+  counter: 0,
+  vehicles: {cars: [], isCarLoaded: false}
 }
 
 
@@ -129,7 +142,7 @@ export const shopReducer = createReducer(
   initialState,
   on(loadShop, state => state),
   on(loadShopSuccess, (state, action) => {
-    return {...action[0],  categories: action[1], shopLoaded: true, counter: 0}
+    return {...action[0],  categories: action[1], shopLoaded: true, counter: 0, vehicles: {cars: [...state.vehicles.cars], isCarLoaded: false}}
   }),
   on(increment, (state) => {
     return {
@@ -148,6 +161,13 @@ on(reset, (state)=> {
         ...state,
         counter: 0
     }
+}),
+on(loadCarBrands, (state) => state),
+on(loadCarBrandsSuccess, (state, action) => {
+
+  return {
+    ...state, vehicles: { cars:Object.values(action)  , isCarLoaded: true} 
+  }
 })
   
 
@@ -163,6 +183,16 @@ export const shopLoaded = createSelector(
 export const selectCounter = createSelector(
   selectShopState,
   state => state.counter
+)
+
+export const isCarLoaded = createSelector(
+  selectShopState,
+  state => state?.vehicles?.isCarLoaded
+)
+
+export const selectCars = createSelector(
+  selectShopState,
+  state => state?.vehicles?.cars
 )
 
 

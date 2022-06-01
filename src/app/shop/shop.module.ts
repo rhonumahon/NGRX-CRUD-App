@@ -9,6 +9,7 @@ import { ShopEffect } from './state/shop.effects';
 import { CounterComponent } from './counter/counter.component';
 import { CounterButtonsComponent } from './counter/counter-buttons/counter-buttons.component';
 import { CounterOutputComponent } from './counter/counter-output/counter-output.component';
+import { CarsResolver } from './cars/cars.resolver';
 
 const routes: Routes = [
   {
@@ -25,7 +26,10 @@ const routes: Routes = [
       },
       {
         path: 'vehicles',
-        loadChildren: ()=> import('./cars/cars.module').then(m => m.CarsModule)
+        loadChildren: ()=> import('./cars/cars.module').then(m => m.CarsModule),
+        resolve: {
+          cars: CarsResolver
+        }
       },
       {
         path: 'industrial',
@@ -43,6 +47,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forFeature('shop', fromShop.shopReducer),
     EffectsModule.forFeature([ShopEffect]),
-  ]
+  ],
+  providers: [CarsResolver]
 })
 export class ShopModule { }

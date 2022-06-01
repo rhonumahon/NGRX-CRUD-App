@@ -64,6 +64,23 @@ export class ShopEffect {
     
   )
 
+  loadCarBrands$: Observable<Action> = createEffect(() => 
+  this.actions$.pipe(
+    ofType(
+      shopActions.ShopActionTypes.LOAD_CARBRANDS
+    ),
+    mergeMap((action: shopActions.ShopActionTypes) => 
+    this.shopService.getCarBrands().pipe(
+      tap(car => console.log(car)
+      ),
+      map((car) =>  shopActions.loadCarBrandsSuccess(car)),
+      catchError((err ) => of(shopActions.loadCarBrandsFail(err)))
+    ))
+  )
+
+  
+)
+
 
   constructor(
     private actions$: Actions,

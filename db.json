@@ -69,5 +69,43 @@
       "category": "Industrial",
       "link": "industrial"
     }
+  ],
+
+  "carBrands" : [
+    {
+      "id": 1,
+      "category": "Mitsubishi",
+      "link": "mitsubishi"
+    },
+    {
+      "id": 2,
+      "category": "Toyota",
+      "link": "toyota"
+    },
+    {
+      "id": 3,
+      "category": "Chevrolet",
+      "link": "chevrolet"
+    },
+    {
+      "id": 4,
+      "category": "Hyundai",
+      "link": "hyundai"
+    },
+    {
+      "id": 5,
+      "category": "Honda",
+      "link": "honda"
+    },
+    {
+      "id": 6,
+      "category": "Geely",
+      "link": "geely"
+    },
+    {
+      "id": 7,
+      "category": "BMW",
+      "link": "bmw"
+    }
   ]
 }
