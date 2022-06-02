@@ -1,1 +1,16 @@
-<p>industrial works!</p>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Item</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ind of industrial$ | async">
+            <td>{{ind.id}}</td>
+            <td>{{ind.item}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

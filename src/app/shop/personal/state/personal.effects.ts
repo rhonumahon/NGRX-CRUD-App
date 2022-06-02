@@ -15,7 +15,7 @@ export class PersonalEffect {
       ofType(
         personalActions.PersonalActionTypes.LOAD_PERSONAL
       ),
-      mergeMap((action: any) => 
+      mergeMap((action: personalActions.PersonalActionTypes) => 
       this.personalService.getPersonal().pipe(
         map((personal: IPersonal[]) => personalActions.loadPersonalSuccess({personal})),
         catchError((err ) => of(personalActions.loadPersonalFail(err)))

@@ -1,4 +1,5 @@
-<table class="table">
+<div class="container">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">Models</th>
@@ -6,8 +7,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let car of cars$ | async">
-        <th scope="row">{{car.category}}</th>
+        <td scope="row">{{car.category}}</td>
       </tr>
       
     </tbody>
   </table>
+</div>

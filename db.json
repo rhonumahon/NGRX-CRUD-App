@@ -121,5 +121,31 @@
       "id": 3,
       "category": "Throusers"
     }
+  ],
+  "industrial" : [
+    {
+      "id": 1,
+      "item": "Grinder"
+    },
+    {
+      "id": 2,
+      "item": "Hammer"
+    },
+    {
+      "id": 3,
+      "item": "Drill"
+    },
+    {
+      "id": 4,
+      "item": "Chainsaw"
+    },
+    {
+      "id": 5,
+      "item": "Stainless Steel sheet"
+    },
+    {
+      "id": 6,
+      "item": "Compressor"
+    }
   ]
 }
