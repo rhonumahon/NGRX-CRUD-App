@@ -12,6 +12,7 @@ import { CounterOutputComponent } from './counter/counter-output/counter-output.
 import { CarsResolver } from './cars/cars.resolver';
 import { PersonalResolver } from './personal/personal.resolver';
 import { IndustrialResolver } from './industrial/industrial.resolver';
+import { IndustrialModule } from './industrial/industrial.module';
 
 const routes: Routes = [
   {

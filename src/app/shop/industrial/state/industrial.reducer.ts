@@ -1,7 +1,8 @@
 import { createEntityAdapter, EntityAdapter } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
-import { loadIndustrial, loadIndustrialSuccessful } from "./industrial.actions";
-import { defaultIndustrialState, IIndustrial } from "./industrial.state";
+import { IIndustrial } from "../industrial.model";
+import { createIndustrialSuccess, loadIndustrial, loadIndustrialSuccessful } from "./industrial.actions";
+import { defaultIndustrialState } from "./industrial.state";
 
 export const industrialAdapter: EntityAdapter<IIndustrial> = createEntityAdapter<IIndustrial>()
 
@@ -11,5 +12,8 @@ initialState,
 on(loadIndustrial, state => state),
 on(loadIndustrialSuccessful, (state, action) => {
     return industrialAdapter.setAll(action.industrial, {...state, isLoaded: true} )
+}),
+on(createIndustrialSuccess, (state, action) => {
+    return industrialAdapter.addOne(action.industrial, state);
 })
 )

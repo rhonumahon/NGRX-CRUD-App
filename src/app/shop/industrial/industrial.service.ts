@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IIndustrial } from "./state/industrial.state";
+import { IIndustrial } from "./industrial.model";
 
 
 @Injectable()
@@ -11,5 +11,9 @@ export class IndustrialService {
 
     getIndustrial(): Observable<IIndustrial[]> {
         return this.http.get<IIndustrial[]>(this.industrialUrl);
-      }
+    }
+
+    createIndustrial(payload: any): Observable<IIndustrial> {
+        return this.http.post<IIndustrial>(this.industrialUrl, payload);
+    }
 }

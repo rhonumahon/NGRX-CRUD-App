@@ -7,6 +7,8 @@ import { industrialReducer } from './state/industrial.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { IndustrialEffect } from './state/industrial.effects';
 import { IndustrialService } from './industrial.service';
+import { IndustrialAddComponent } from './industrial-add/industrial-add.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -16,13 +18,15 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [IndustrialComponent],
+  declarations: [IndustrialComponent, IndustrialAddComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forFeature('industrial', industrialReducer),
     EffectsModule.forFeature([IndustrialEffect])
   ],
-  providers: [IndustrialService]
+  providers: [IndustrialService],
 })
 export class IndustrialModule { }
