@@ -16,4 +16,8 @@ export class IndustrialService {
     createIndustrial(payload: any): Observable<IIndustrial> {
         return this.http.post<IIndustrial>(this.industrialUrl, payload);
     }
+
+    updateIndustrial(payload: any): Observable<IIndustrial> {
+        return this.http.patch<IIndustrial>(`${this.industrialUrl}/${payload.id}`, payload);
+    }
 }

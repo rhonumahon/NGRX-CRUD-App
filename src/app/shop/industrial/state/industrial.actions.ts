@@ -1,3 +1,4 @@
+import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 import { IIndustrial } from "../industrial.model";
 
@@ -8,7 +9,11 @@ export enum IndustrialActionTypes {
 
     CREATE_INDUSTRIAL = '[INDUSTRIAL] Create Industrial',
     CREATE_INDUSTRIAL_SUCCESS = '[INDUSTRIAL] Create Industrial Successful',
-    CREATE_INDUSTRIAL_FAIL = '[INDUSTRIAL] Create Industrial Fail'
+    CREATE_INDUSTRIAL_FAIL = '[INDUSTRIAL] Create Industrial Fail',
+
+    UPDATE_INDUSTRIAL = '[INDUSTRIAL] Update Industrial',
+    UPDATE_INDUSTRIAL_SUCCESS = '[INDUSTRIAL] Update Industrial Successful',
+    UPDATE_INDUSTRIAL_FAIL = '[INDUSTRIAL] Update Industrial Fail'
 }
 
 export const loadIndustrial = createAction(
@@ -39,3 +44,22 @@ export const createIndustrialFail = createAction(
     IndustrialActionTypes.CREATE_INDUSTRIAL_FAIL,
     error => error
 )
+
+export const updateIndustrial = createAction(
+    IndustrialActionTypes.UPDATE_INDUSTRIAL,
+    props<{ industrial: IIndustrial }>()
+  );
+  
+  export const updateIndustrialSuccess = createAction(
+    IndustrialActionTypes.UPDATE_INDUSTRIAL_SUCCESS,
+    props<{ industrial: Update<IIndustrial> }>()
+  );
+
+  export const updateIndustrialFail = createAction(
+    IndustrialActionTypes.CREATE_INDUSTRIAL_FAIL,
+    error => {
+        console.log(error);
+        return error
+    }
+    
+  );
