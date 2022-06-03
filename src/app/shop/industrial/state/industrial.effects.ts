@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Update } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { catchError, map, mergeMap, Observable, of, switchMap } from "rxjs";
+import { catchError, map, mergeMap, Observable, of, switchMap, tap } from "rxjs";
 import { loadCarBrandsFail } from "../../state/shop.actions";
 import { IIndustrial } from "../industrial.model";
 import { IndustrialService } from "../industrial.service";
-import { createIndustrial, createIndustrialFail, createIndustrialSuccess, loadIndustrial, loadIndustrialSuccessful, updateIndustrial, updateIndustrialFail, updateIndustrialSuccess } from "./industrial.actions";
+import { createIndustrial, createIndustrialFail, createIndustrialSuccess, deleteIndustrial, deleteIndustrialFail, deleteIndustrialSuccess, loadIndustrial, loadIndustrialSuccessful, updateIndustrial, updateIndustrialFail, updateIndustrialSuccess } from "./industrial.actions";
 
 @Injectable()
 export class IndustrialEffect {
@@ -46,6 +46,8 @@ export class IndustrialEffect {
         
         return this.industrialService.updateIndustrial(action.industrial).pipe(
           map((data) => {
+            console.log(data);
+            
             const updatedPost: Update<IIndustrial> = {
               id: Number(action.industrial.id),
               changes: {
@@ -61,6 +63,22 @@ export class IndustrialEffect {
       })
     );
   })
+
+  deleteIndustrial$: Observable<Action> = createEffect(() =>
+  this.actions$.pipe(
+    ofType(deleteIndustrial),
+    switchMap((action) => {
+      return this.industrialService.deleteIndustrial(action.id).pipe(
+        map((data) => {
+          return deleteIndustrialSuccess({ id: action.id });
+        }),
+        catchError((err ) => {
+          return of(updateIndustrialFail(err))
+        })
+      ); 
+    })
+    )
+);
 
 
   constructor(private actions$: Actions, private industrialService: IndustrialService){}

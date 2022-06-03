@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
 import { IIndustrial } from "../industrial.model";
-import { createIndustrialSuccess, loadIndustrial, loadIndustrialSuccessful, updateIndustrialFail, updateIndustrialSuccess } from "./industrial.actions";
+import { createIndustrialSuccess, deleteIndustrialFail, deleteIndustrialSuccess, loadIndustrial, loadIndustrialSuccessful, updateIndustrialFail, updateIndustrialSuccess } from "./industrial.actions";
 import { defaultIndustrialState } from "./industrial.state";
 
 export const industrialAdapter: EntityAdapter<IIndustrial> = createEntityAdapter<IIndustrial>()
@@ -22,4 +22,13 @@ on(updateIndustrialSuccess, (state, action) => {
   on(updateIndustrialFail, (state, action) => {
     return {...state, error: action.industrial}
   }),
-)
+  on(deleteIndustrialSuccess, (state, { id }) => {
+    return industrialAdapter.removeOne(id, state);
+  }),
+    on(deleteIndustrialSuccess, (state, { id }) => {
+    return industrialAdapter.removeOne(id, state);
+  }),
+  on(deleteIndustrialFail, (state, action) => {
+    return {...state, error: action.id}
+  }),
+)     

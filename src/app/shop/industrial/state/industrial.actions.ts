@@ -13,7 +13,11 @@ export enum IndustrialActionTypes {
 
     UPDATE_INDUSTRIAL = '[INDUSTRIAL] Update Industrial',
     UPDATE_INDUSTRIAL_SUCCESS = '[INDUSTRIAL] Update Industrial Successful',
-    UPDATE_INDUSTRIAL_FAIL = '[INDUSTRIAL] Update Industrial Fail'
+    UPDATE_INDUSTRIAL_FAIL = '[INDUSTRIAL] Update Industrial Fail',
+
+    DELETE_INDUSTRIAL = '[INDUSTRIAL] Delete Industrial',
+    DELETE_INDUSTRIAL_SUCCESS = '[INDUSTRIAL] Delete Industrial Successful',
+    DELETE_INDUSTRIAL_FAIL = '[INDUSTRIAL] Delete Industrial Fail'
 }
 
 export const loadIndustrial = createAction(
@@ -56,10 +60,21 @@ export const updateIndustrial = createAction(
   );
 
   export const updateIndustrialFail = createAction(
-    IndustrialActionTypes.CREATE_INDUSTRIAL_FAIL,
-    error => {
-        console.log(error);
-        return error
-    }
-    
+    IndustrialActionTypes.UPDATE_INDUSTRIAL_FAIL,
+    error => error
+  );
+
+  export const deleteIndustrial = createAction(
+    IndustrialActionTypes.DELETE_INDUSTRIAL,
+    props<{ id: string }>()
+  );
+  
+  export const deleteIndustrialSuccess = createAction(
+    IndustrialActionTypes.DELETE_INDUSTRIAL_SUCCESS,
+    props<{ id: string }>()
+  );
+
+  export const deleteIndustrialFail = createAction(
+    IndustrialActionTypes.DELETE_INDUSTRIAL_FAIL,
+    error => error
   );

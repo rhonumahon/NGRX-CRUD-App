@@ -1,6 +1,6 @@
 <div class="container">
     <app-industrial-add></app-industrial-add>
-    <table class="table">
+    <table class="table mt-3">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -20,6 +20,7 @@
                   </div>
                   <div class="col-4">
                     <button class="btn btn-success" (click)="updateIndustrial(ind.id)">Update</button>
+                    <button class="btn btn-danger" (click)="deleteIndustrial(ind.id)">Delete</button>
                   </div>
               
                 </div>

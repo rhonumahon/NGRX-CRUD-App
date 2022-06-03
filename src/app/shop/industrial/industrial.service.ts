@@ -20,4 +20,8 @@ export class IndustrialService {
     updateIndustrial(payload: any): Observable<IIndustrial> {
         return this.http.patch<IIndustrial>(`${this.industrialUrl}/${payload.id}`, payload);
     }
+
+    deleteIndustrial(id: string) {
+        return this.http.delete(`${this.industrialUrl}/${id}`);
+    }
 }

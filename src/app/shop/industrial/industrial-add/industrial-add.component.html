@@ -1,9 +1,11 @@
-<h3>Add Industrial</h3>
+<div class="container mt-3">
 <form [formGroup]="industrialForm">
-    <div class="row" >
-        <div class="input-group mb-3">
+    <div class="row">
+        <div class="col-9 d-flex flex-wrap">
+            <h4 class="mr-2">Add Industrial:</h4>
             <input type="text" class="form-control" placeholder="item" formControlName="item">
-            <button class="btn btn-outline-secondary" type="button" (click)="createCustomer()">Add</button>
-          </div>
+            <button class="btn btn-outline-secondary" type="button" (click)="createCustomer()">Add Item</button>
+        </div>
     </div>
 </form>
+</div>

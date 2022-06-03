@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AppState } from 'src/app/state/app-state';
 import { IIndustrial } from './industrial.model';
 import { IndustrialService } from './industrial.service';
-import { updateIndustrial } from './state/industrial.actions';
+import { deleteIndustrial, updateIndustrial } from './state/industrial.actions';
 import { selIndustrialEntities } from './state/industrial.selector';
 
 @Component({
@@ -33,5 +33,9 @@ export class IndustrialComponent implements OnInit {
     console.log(industrial);
     
     this.store.dispatch(updateIndustrial({industrial}))
+  }
+
+  deleteIndustrial(id: any){
+    this.store.dispatch(deleteIndustrial({id}))
   }
 }
