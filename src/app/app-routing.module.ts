@@ -22,6 +22,11 @@ const routes: Routes = [
       }
   },
   {
+    path: 'rxjs',
+    loadChildren: () =>
+      import('./rxjs/rxjs.module').then((m) => m.RxjsModule)
+  },
+  {
     path: 'customers',
     loadChildren: () =>
       import('./customers/customers.module').then((m) => m.CustomersModule),
