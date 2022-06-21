@@ -1,1 +1,26 @@
-<p>rxjs works!</p>
+<div class="container mt-3">
+<div class="container  mb-5">
+  <nav class="navbar navbar-light bg-light">
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" #searchInput>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+    </form>
+  </nav>
+  <div *ngFor="let ac of searchedCars$ | async">
+    <div>
+      {{ac.category}}
+    </div>
+  </div>
+</div>
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="categort">Category</label>
+      <input type="text" class="form-control" id="category" placeholder="Category" formControlName="category">
+    </div>
+    <div class="form-group">
+      <label for="link">Link</label>
+      <input type="text" class="form-control" id="link" placeholder="Link" formControlName="link">
+    </div>
+    <button type="submit" class="btn btn-primary" #submitButton>Submit</button>
+  </form>
+</div>
