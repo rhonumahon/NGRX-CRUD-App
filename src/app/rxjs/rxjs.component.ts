@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { concat, concatMap, debounceTime, distinctUntilChanged, exhaustMap, filter, first, fromEvent, map, mergeMap, Observable, shareReplay, switchMap } from 'rxjs';
+import { combineLatest, combineLatestWith, concat, concatMap, debounceTime, distinctUntilChanged, exhaustMap, filter, first, fromEvent, map, mergeMap, Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { CarBrands, Shop } from '../shop/shop.model';
 
 @Component({
@@ -84,25 +84,68 @@ export class RxjsComponent implements OnInit, AfterViewInit {
 
 
   //--------------------------------debounceTime() and distinctUntilChanged() and switchMap()----------------------------
+
   //debounceTime - Emits a value from the source Observable only after a particular time span has passed without another source emission
   //  distinctUntilChanged - ignore duplicate obs input
   // switchMap - Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable.
+  // ngOnInit(): void {
+  //   //switching obs from one to another
+  //   const cars$ = this.getCars();
+  //   const shop$ = this.getShop();
+  //   const combined$ = cars$.pipe(
+  //     switchMap(car => {
+  //       return shop$.pipe(
+  //         tap( shop => {
+  //           console.log('cars: ', car);
+  //           console.log('shop: ', shop);
+
+  //         }),
+  //         map(shop => {
+  //           return car.map(item => {
+  //             const {...etc} = item;
+  //             const shopTitle = shop.title;
+  //             return {...etc, shopTitle}
+  //           })
+  //         })
+  //       )
+  //     })
+  //   )
+
+  //   combined$.subscribe(i => console.log(i, 'LOGS')
+  //   );
+  // }
+
+  // ngAfterViewInit(){
+  //   const srchCars$ = fromEvent<any>(this.searchInput.nativeElement, 'keyup')
+  //     .pipe(
+  //        map(event => event.target.value),
+  //        debounceTime(400),
+  //        distinctUntilChanged(),
+  //        switchMap(search =>  this.getCarsBySearch(search))
+  //   )
+
+  //   const initialCars$ = this.getCarsBySearch();
+
+  //   this.searchedCars$ = concat(initialCars$, srchCars$)
+  // }
+
+  //--------------------------------------------- combineLatestWith()----------------------------
+
   ngOnInit(): void {
-
-  }
-
-    ngAfterViewInit(){
-    const srchCars$ = fromEvent<any>(this.searchInput.nativeElement, 'keyup')
-      .pipe(
-         map(event => event.target.value),
-         debounceTime(400),
-         distinctUntilChanged(),
-         switchMap(search =>  this.getCarsBySearch(search))
-    )
-
-    const initialCars$ = this.getCarsBySearch();
-
-    this.searchedCars$ = concat(initialCars$, srchCars$)
+    const cars$ = this.getCars();
+    const shop$ = this.getShop();
+    const combined$ = shop$.pipe(
+      combineLatestWith(cars$),
+      map(([shop, car]) => {
+        return car.map(item => {
+          const {...etc} = item;
+          const shopTitle = shop.title;
+          return {...etc, shopTitle}
+        })
+      })
+        )
+    combined$.subscribe(console.log
+    );
   }
 
   createCustomer(payload: CarBrands): Observable<CarBrands> {
