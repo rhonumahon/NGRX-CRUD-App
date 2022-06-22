@@ -247,5 +247,8 @@
       "item": "Electric Motor",
       "id": 7
     }
-  ]
+  ],
+  "errorApi": {
+    "message": "error-message"
+  }
 }

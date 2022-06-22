@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { combineLatest, combineLatestWith, concat, concatMap, debounceTime, distinctUntilChanged, exhaustMap, filter, first, fromEvent, map, mergeMap, Observable, shareReplay, switchMap, tap } from 'rxjs';
+import { catchError, combineLatest, combineLatestWith, concat, concatMap, debounceTime, delayWhen, distinctUntilChanged, exhaustMap, filter, first, fromEvent, map, mergeMap, Observable, retryWhen, shareReplay, startWith, Subject, switchMap, tap, throwError, timer } from 'rxjs';
 import { CarBrands, Shop } from '../shop/shop.model';
 
 @Component({
@@ -9,11 +9,14 @@ import { CarBrands, Shop } from '../shop/shop.model';
   templateUrl: './rxjs.component.html',
   styleUrls: ['./rxjs.component.css']
 })
-export class RxjsComponent implements OnInit, AfterViewInit {
+export class RxjsComponent implements OnInit
+//, AfterViewInit
+{
   form: FormGroup
   activeTab = 'sharedReplay';
   carBrands = 'http://localhost:3000/carBrands';
   shopUrl = 'http://localhost:3000/shop';
+  errorApi = 'http://localhost:3000/errorApi';
   newCars$: Observable<CarBrands[]>;
   oldCars$: Observable<CarBrands[]>;
   searchedCars$: Observable<CarBrands[]>;
@@ -83,9 +86,9 @@ export class RxjsComponent implements OnInit, AfterViewInit {
   // }
 
 
-  //--------------------------------debounceTime() and distinctUntilChanged() and switchMap()----------------------------
+  //--------------------debounceTime()/throttleTime(), distinctUntilChanged() and switchMap()----------------------------
 
-  //debounceTime - Emits a value from the source Observable only after a particular time span has passed without another source emission
+  // debounceTime - Emits a value from the source Observable only after a particular time span has passed without another source emission
   //  distinctUntilChanged - ignore duplicate obs input
   // switchMap - Projects each source value to an Observable which is merged in the output Observable, emitting values only from the most recently projected Observable.
   // ngOnInit(): void {
@@ -128,24 +131,76 @@ export class RxjsComponent implements OnInit, AfterViewInit {
 
   //   this.searchedCars$ = concat(initialCars$, srchCars$)
   // }
+  //------using startWith()------
+  //   ngAfterViewInit(){
+  //     this.searchedCars$ = fromEvent<any>(this.searchInput.nativeElement, 'keyup')
+  //     .pipe(
+  //        map(event => event.target.value),
+  //        startWith('Toyota'),
+  //        debounceTime(400), // throttleTime(400),
+  //        distinctUntilChanged(),
+  //        switchMap(search =>  this.getCarsBySearch(search))
+  //   )
+  // }
 
   //--------------------------------------------- combineLatestWith()----------------------------
 
+  // ngOnInit(): void {
+  //   const cars$ = this.getCars();
+  //   const shop$ = this.getShop();
+  //   const combined$ = shop$.pipe(
+  //     combineLatestWith(cars$),
+  //     map(([shop, car]) => {
+  //       return car.map(item => {
+  //         const {...etc} = item;
+  //         const shopTitle = shop.title;
+  //         return {...etc, shopTitle}
+  //       })
+  //     })
+  //       )
+  //   combined$.subscribe(console.log
+  //   );
+  // }
+
+  //------------------------------------error strategy-----------------------------------------
+  // ngOnInit(): void {
+  //   this.getError().pipe(
+  //     tap(() => console.log("HTTP request executed")
+  //     ),
+  //     map(res => res),
+  //     retryWhen(error => error.pipe(
+  //       delayWhen(() => timer(2000))
+  //     ))
+  //   ).subscribe()
+  // }
+
+  //-------------------------------------RXJS SUBJECTS---------------------
+  // ngOnInit(): void {
+  //   const subject =  new Subject();
+  //   const series$ = subject.asObservable();
+  //   series$.subscribe(console.log)
+
+  //   subject.next(1);
+  //   subject.next(2);
+  //   subject.next(3);
+  //   subject.complete();
+  // }
+
+    //-------------------------------------RXJS SUBJECTS when to use it---------------------
   ngOnInit(): void {
-    const cars$ = this.getCars();
-    const shop$ = this.getShop();
-    const combined$ = shop$.pipe(
-      combineLatestWith(cars$),
-      map(([shop, car]) => {
-        return car.map(item => {
-          const {...etc} = item;
-          const shopTitle = shop.title;
-          return {...etc, shopTitle}
-        })
-      })
-        )
-    combined$.subscribe(console.log
-    );
+    const subject =  new Subject();
+    const series$ = subject.asObservable();
+    series$.subscribe(sub => console.log('early sub: ' + sub))
+
+    subject.next(1);
+    subject.next(2);
+    subject.next(3);
+    //subject.complete();
+
+    setTimeout(()=>{
+      series$.subscribe(sub => console.log('late sub: ' + sub))
+
+    },2000)
   }
 
   createCustomer(payload: CarBrands): Observable<CarBrands> {
@@ -163,6 +218,10 @@ export class RxjsComponent implements OnInit, AfterViewInit {
 
   getShop(): Observable<Shop> {
     return this.http.get<Shop>(this.shopUrl);
+  }
+
+  getError() {
+    return this.http.get<any>(this.errorApi);
   }
 
 }
