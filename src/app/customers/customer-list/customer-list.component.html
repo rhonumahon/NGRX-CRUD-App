@@ -72,3 +72,12 @@
     </div>
   </div>
 </div>
+
+<mat-paginator
+  [length]="total$ | async"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex$ | async"
+  aria-label="Select page"
+  (page)="onPaginateChange($event)"
+>
+</mat-paginator>

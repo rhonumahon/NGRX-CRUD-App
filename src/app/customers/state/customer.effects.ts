@@ -1,17 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
-import { Customer } from '../customer.model';
+import {
+  catchError,
+  combineLatestWith,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  mergeMap,
+  startWith,
+  throttleTime,
+  withLatestFrom,
+} from 'rxjs/operators';
+import { Customer, CustomerResponse } from '../customer.model';
 import { CustomerService } from '../customer.service';
 import * as customerActions from './customer.actions';
+import * as fromCustomer from '../state/customer.reducer';
 
 @Injectable()
 export class CustomerEffect {
   constructor(
     private actions$: Actions,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private _store: Store<fromCustomer.AppState>
   ) {}
 
   loadCustomers$: Observable<Action> = createEffect(() =>
@@ -19,14 +31,25 @@ export class CustomerEffect {
       ofType<customerActions.LoadCustomers>(
         customerActions.CustomerActionTypes.LOAD_CUSTOMERS
       ),
-      mergeMap((action: customerActions.LoadCustomers) =>
-        this.customerService.getCustomers().pipe(
-          map(
-            (customers: Customer[]) =>
-              new customerActions.LoadCustomersSuccess(customers)
-          ),
-          catchError((err) => of(new customerActions.LoadCustomersFail(err)))
-        )
+      combineLatestWith(
+        this._store
+          .select(fromCustomer.getSearchInput)
+          .pipe(debounceTime(600), distinctUntilChanged()),
+        this._store.select(fromCustomer.getPageIndex)
+      ),
+      mergeMap(
+        ([action, search, index]: [
+          customerActions.LoadCustomers,
+          string,
+          number
+        ]) =>
+          this.customerService.getCustomers({ search, index: index + 1 }).pipe(
+            map(
+              (customers: CustomerResponse) =>
+                new customerActions.LoadCustomersSuccess(customers)
+            ),
+            catchError((err) => of(new customerActions.LoadCustomersFail(err)))
+          )
       )
     )
   );

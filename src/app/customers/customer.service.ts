@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
-import { Customer } from './customer.model';
+import { Customer, CustomerResponse } from './customer.model';
+import { pageSize } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,25 @@ export class CustomerService {
 
   constructor(private http: HttpClient) {}
 
-  getCustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.customersUrl);
+  getCustomers(payload: {
+    search: string;
+    index: number;
+  }): Observable<CustomerResponse> {
+    return this.http
+      .get<CustomerResponse>(this.customersUrl, {
+        params: { q: payload.search, _page: payload.index, _limit: pageSize },
+        observe: 'response',
+      })
+      .pipe(
+        map((resp: HttpResponse<CustomerResponse>): CustomerResponse => {
+          const customers = resp.body;
+          const newCustomers: any = [];
+          return {
+            data: newCustomers.concat(customers),
+            total: Number(resp.headers.get('X-Total-Count')),
+          };
+        })
+      );
   }
 
   getCustomerById(payload: number): Observable<Customer> {

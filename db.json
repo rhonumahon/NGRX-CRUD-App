@@ -41,6 +41,13 @@
       "address": "Purok 2, Brgy. Calicanto",
       "membership": "Platinum",
       "id": 11
+    },
+    {
+      "name": "Happy",
+      "phone": "1231231",
+      "address": "dawad",
+      "membership": "Basic",
+      "id": 12
     }
   ]
 }

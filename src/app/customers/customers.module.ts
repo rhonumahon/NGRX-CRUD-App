@@ -10,6 +10,7 @@ import { customerReducer } from './state/customer.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomerEffect } from './state/customer.effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    MatPaginatorModule,
     RouterModule.forChild([
       {
         path: '',

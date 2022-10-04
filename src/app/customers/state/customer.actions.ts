@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Customer } from '../customer.model';
+import { Customer, CustomerResponse } from '../customer.model';
 import { Update } from '@ngrx/entity';
 
 export enum CustomerActionTypes {
@@ -18,6 +18,8 @@ export enum CustomerActionTypes {
   DELETE_CUSTOMER = '[Customer] Delete Customer',
   DELETE_CUSTOMER_SUCCESS = '[Customer] Delete Customer Success',
   DELETE_CUSTOMER_FAIL = '[Customer] Delete Customer Fail',
+  SEARCH_COSTUMER = '[Customer] Search a costumer',
+  SET_PAGE_INDEX = '[Customer] Set page index',
 }
 
 export class LoadCustomers implements Action {
@@ -27,9 +29,7 @@ export class LoadCustomers implements Action {
 export class LoadCustomersSuccess implements Action {
   readonly type = CustomerActionTypes.LOAD_CUSTOMERS_SUCCESS;
 
-  constructor(public payload: Customer[]) {
-    console.log(payload);
-  }
+  constructor(public payload: CustomerResponse) {}
 }
 
 export class LoadCustomersFail implements Action {
@@ -110,6 +110,18 @@ export class DeleteCustomerFail implements Action {
   constructor(public payload: string) {}
 }
 
+export class SearchCostumer implements Action {
+  readonly type = CustomerActionTypes.SEARCH_COSTUMER;
+
+  constructor(public payload: string) {}
+}
+
+export class SetPageIndex implements Action {
+  readonly type = CustomerActionTypes.SET_PAGE_INDEX;
+
+  constructor(public payload: number) {}
+}
+
 export type Actions =
   | LoadCustomers
   | LoadCustomersSuccess
@@ -125,4 +137,6 @@ export type Actions =
   | UpdateCustomerFail
   | DeleteCustomer
   | DeleteCustomerSuccess
-  | DeleteCustomerFail;
+  | DeleteCustomerFail
+  | SearchCostumer
+  | SetPageIndex;

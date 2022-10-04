@@ -9,6 +9,9 @@ export interface CustomerState extends EntityState<Customer> {
   loading: boolean;
   loaded: boolean;
   error: string;
+  searchInput: string;
+  pageIndex: number;
+  total: number;
 }
 
 export interface AppState extends fromRoot.AppState {
@@ -25,6 +28,9 @@ export const defaultCustomer: CustomerState = {
   loading: false,
   loaded: false,
   error: '',
+  searchInput: '',
+  pageIndex: 0,
+  total: 0,
 };
 
 export const initialState = customerAdapter.getInitialState(defaultCustomer);
@@ -42,10 +48,11 @@ export function customerReducer(
     }
 
     case customerActions.CustomerActionTypes.LOAD_CUSTOMERS_SUCCESS: {
-      return customerAdapter.setAll(action.payload, {
+      return customerAdapter.setAll(action.payload.data, {
         ...state,
         loading: false,
         loaded: true,
+        total: action.payload.total,
       });
     }
 
@@ -106,6 +113,20 @@ export function customerReducer(
       };
     }
 
+    case customerActions.CustomerActionTypes.SEARCH_COSTUMER: {
+      return {
+        ...state,
+        searchInput: action.payload,
+      };
+    }
+
+    case customerActions.CustomerActionTypes.SET_PAGE_INDEX: {
+      return {
+        ...state,
+        pageIndex: action.payload,
+      };
+    }
+
     default: {
       return state;
     }
@@ -139,6 +160,23 @@ export const getError = createSelector(
 export const getCurrentCustomerId = createSelector(
   getCustomerFeatureState,
   (state: CustomerState) => state.selectedCustomerId
+);
+
+export const getSearchInput = createSelector(
+  getCustomerFeatureState,
+  (state: CustomerState) => state.searchInput
+);
+
+export const getCostumersTotal = createSelector(
+  getCustomers,
+  getCustomerFeatureState,
+  (customers: Customer[], state: CustomerState) =>
+    state.searchInput ? customers.length : state.total
+);
+
+export const getPageIndex = createSelector(
+  getCustomerFeatureState,
+  (state: CustomerState) => state.pageIndex
 );
 
 export const getCurrentCustomer = createSelector(

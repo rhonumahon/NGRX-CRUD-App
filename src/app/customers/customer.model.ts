@@ -5,3 +5,8 @@ export interface Customer {
   address: string;
   membership: string;
 }
+
+export interface CustomerResponse {
+  data: Customer[];
+  total: number;
+}
