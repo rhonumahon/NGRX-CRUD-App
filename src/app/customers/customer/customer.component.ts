@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { LoadRoles } from 'src/app/shared/store/roles/roles.actions';
 import { SearchCostumer } from '../state/customer.actions';
 import * as fromCustomer from '../state/customer.reducer';
 
@@ -15,6 +16,7 @@ export class CustomerComponent implements OnInit {
   constructor(private _store: Store<fromCustomer.AppState>) {}
 
   ngOnInit(): void {
+    this._store.dispatch(new LoadRoles());
     this.searchInput$ = this._store.select(fromCustomer.getSearchInput);
   }
 

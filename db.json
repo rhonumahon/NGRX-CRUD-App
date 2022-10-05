@@ -49,5 +49,10 @@
       "membership": "Basic",
       "id": 12
     }
+  ],
+  "roles": [
+    { "roleName": "Admin", "id": 1 },
+    { "roleName": "Deletion Manager", "id": 2 },
+    { "roleName": "Data Manager", "id": 3 }
   ]
 }
