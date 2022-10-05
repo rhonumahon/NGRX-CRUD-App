@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent],
@@ -20,6 +21,7 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     CoreModule,
     AppStoreModule,
+    SharedModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
